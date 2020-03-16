@@ -45,7 +45,7 @@ class WebsiteTasks(TaskSet):
                  "from":"CCS","to":"LINE","type":"text","content":"{\"text\":\"test1234 "+ str(uuid.uuid4())+"\"}"}
             },"query":"mutation updateMessage($input: UpdateMessageInput!) {\n  updateMessage(input: $input) {\n    ...chatMessage\n    __typename\n  }\n}\n\nfragment chatMessage on ChatMessage {\n  id\n  from\n  to\n  message {\n    ...message\n    __typename\n  }\n  __typename\n}\n\nfragment message on Message {\n  source {\n    roomId\n    channel\n    __typename\n  }\n  type\n  content {\n    text\n    __typename\n  }\n  __typename\n}\n"}
         r = self.client.post(url, json=json, headers=headers,name='postMessages')
-        print(r.content[:100])
+        # print(r.content[:100])
 
     @task(20)
     def webhookMessages(self):
@@ -68,7 +68,7 @@ class WebsiteTasks(TaskSet):
               ]
             }
         r = self.client.post("https://aoc-dev.appman.co.th/webhook/mock-line", json=json, headers={},name='webhookMessages')
-        print(r.content[:100])
+        # print(r.content[:100])
 
 
 
