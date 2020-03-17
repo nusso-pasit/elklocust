@@ -89,7 +89,7 @@ class WebsiteTasks(TaskSet):
     #
     #     assert response_data.get("data",{}).get("updateMessage",{}) is not None , r.content[:256]
 
-    @task(10)
+    @task(1)
     def postMessages(self):
         json ={"operationName":"updateMessage","variables":{"input":{"id":self.user_id,
                  "from":"CCS","to":"LINE","type":"text","content":"{\"text\":\"test1234 "+ str(uuid.uuid4())+"\"}"}
@@ -101,7 +101,7 @@ class WebsiteTasks(TaskSet):
                 r.success()
             else:
                 r.failure(response_data.get("errors", {})[0]['message'][:175])
-    @task(10)
+    @task(1)
     def webhookMessages(self):
         json ={
               "events": [
@@ -129,5 +129,5 @@ class WebsiteTasks(TaskSet):
 class WebsiteUser(HttpLocust):
     task_set = WebsiteTasks
     #By default the time is randomly chosen uniformly between min_wait and max_wait
-    min_wait = 1000
-    max_wait = 1500
+    min_wait = 5000
+    max_wait = 15000
