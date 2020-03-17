@@ -34,7 +34,7 @@ class WebsiteTasks(TaskSet):
         self.headers['authorization'] = self.access_token
         # credentials = random.choice(user_credentials)
         # self.client.post("/login/", {"username":credentials[0], "password":credentials[1]})
-        self.user_id = 'Ufe614bfb440ebc3f8121a9b988e730f8'
+        self.user_id = 'U52030c4abcb993fe5f868d7f48531406'
         # ws = create_connection('ws://127.0.0.1:5000/echo')
         # self.ws = ws
 
@@ -52,14 +52,29 @@ class WebsiteTasks(TaskSet):
         r = self.client.post(url, json=json, headers=self.headers,name='getMessages')
 
 
+    # @task(20)
+    # def postMessages(self):
+    #     json ={"operationName":"updateMessage","variables":{"input":{"id":self.user_id,
+    #              "from":"CCS","to":"LINE","type":"text","content":"{\"text\":\"jj "+ str(uuid.uuid4())+"\"}"}
+    #         },"query":"mutation updateMessage($input: UpdateMessageInput!) {\n  updateMessage(input: $input) {\n    ...chatMessage\n    __typename\n  }\n}\n\nfragment chatMessage on ChatMessage {\n  id\n  from\n  to\n  message {\n    ...message\n    __typename\n  }\n  __typename\n}\n\nfragment message on Message {\n  source {\n    roomId\n    channel\n    __typename\n  }\n  type\n  content {\n    text\n    __typename\n  }\n  __typename\n}\n"}
+    #     r = self.client.post(url, json=json, headers=self.headers,name='postMessages')
+    #     # print(r.content[:100])
+    #     response_data = r.json()
+    #
+    #     assert response_data.get("data",{}).get("updateMessage",{}) is not None , r.content[:256]
+
     @task(20)
     def postMessages(self):
         json ={"operationName":"updateMessage","variables":{"input":{"id":self.user_id,
                  "from":"CCS","to":"LINE","type":"text","content":"{\"text\":\"test1234 "+ str(uuid.uuid4())+"\"}"}
             },"query":"mutation updateMessage($input: UpdateMessageInput!) {\n  updateMessage(input: $input) {\n    ...chatMessage\n    __typename\n  }\n}\n\nfragment chatMessage on ChatMessage {\n  id\n  from\n  to\n  message {\n    ...message\n    __typename\n  }\n  __typename\n}\n\nfragment message on Message {\n  source {\n    roomId\n    channel\n    __typename\n  }\n  type\n  content {\n    text\n    __typename\n  }\n  __typename\n}\n"}
-        r = self.client.post(url, json=json, headers=self.headers,name='postMessages')
-        # print(r.content[:100])
-
+        with self.client.post(url, json=json, headers=self.headers, \
+                              name='postMessages',  catch_response=True) as r:
+            response_data = r.json()
+            if response_data.get("data",{}).get("updateMessage",{}) is not None :
+                r.success()
+            else:
+                r.failure(response_data.get("errors", {})[0]['message'])
     @task(20)
     def webhookMessages(self):
         json ={
@@ -88,5 +103,5 @@ class WebsiteTasks(TaskSet):
 class WebsiteUser(HttpLocust):
     task_set = WebsiteTasks
     #By default the time is randomly chosen uniformly between min_wait and max_wait
-    min_wait = 200
+    min_wait = 1000
     max_wait = 1500
