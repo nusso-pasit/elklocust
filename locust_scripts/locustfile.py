@@ -38,7 +38,6 @@ class WebsiteTasks(TaskSet):
                    }
         # r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
         # self.access_token = r.json()['access_token']
-        self.headers['authorization'] = self.access_token
         # credentials = random.choice(user_credentials)
         # self.client.post("/login/", {"username":credentials[0], "password":credentials[1]})
         # self.user_id = 'U52030c4abcb993fe5f868d7f48531406'
