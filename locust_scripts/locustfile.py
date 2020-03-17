@@ -3,7 +3,7 @@ import uuid
 import math
 from locust import HttpLocust, TaskSet, task
 import time
-
+import requests
 Names = "Beatrix,Blaire,Callie,Cecily,Cleo,Coco,Cosette,Cybil,Daisy".split(",")
 # load user credentials from CSV
 #user_credentials = read_user_credentials_from_csv()
@@ -13,28 +13,29 @@ webhook_line = "https://aoc-dev.appman.co.th/webhook/mock-line"
 # webhook_line = 'http://192.168.2.85:8080/webhook/mock-line'
 url= 'https://tdacwe7cl5hhpnd22xqfkf66ia.appsync-api.ap-southeast-1.amazonaws.com/graphql'
 
+payload = {
+    'username': 'test',
+    'password': '1q2w3e4r',
+    'grant_type': 'password',
+    'client_id': 'ccs',
+    'response_type': 'token'
+}
+r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
+access_token = r.json()['access_token']
 
 class WebsiteTasks(TaskSet):
     def on_start(self):
         print("start init")
-        import requests
         self.headers = {'authority': 'tdacwe7cl5hhpnd22xqfkf66ia.appsync-api.ap-southeast-1.amazonaws.com',
                    'pragma': 'no-cache',
                    'cache-control': 'no-cache',
                    'accept': '*/*',
                    'sec-fetch-dest': 'empty',
-                   'authorization': 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1eGxZMFJ2WnBBR3M1MVJYdldpRjJ4SGhsTWJvbmdRZWhDVTZaMGdrX2R3In0.eyJqdGkiOiIzZDMwMjgyYi1hMjQyLTRhMzEtOGQxMi02MzM3MmRlZDM5ZTAiLCJleHAiOjE1ODQ1MjAxNDcsIm5iZiI6MCwiaWF0IjoxNTg0NDQ4MTQ3LCJpc3MiOiJodHRwczovL2FvYy1kZXYuYXBwbWFuLmNvLnRoL2F1dGgvcmVhbG1zL2FnbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiNzJhNGI4NS01NGJhLTQzZTYtOGU5YS05ZGI2YTFiM2QyNzIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjY3MiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI0NDAzYjNlOS1lZDVhLTQ5NTgtYmQyZi1hMjkwODIxZmM5MGIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJmb28gYmFyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJmb28iLCJmYW1pbHlfbmFtZSI6ImJhciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSJ9.KkNshkzyYK-mFbo57A4iWacBEJhB5zyxHlCbBmJsAbmyGdK-tdIMCuEft2kS7iIFQSnD1I2ht-QEMOtgoGqn9n7F0iAqPRbUGY9IvVEQ1smLNkNoTkduYPlIhqnLHtGVXmst6s4nOCfvbirtyr-5DfMAUhkErqkgyXrOlST-RFZ7hVh4MntkgYzhUUr3Noy4cb1ykMB95OofLxEdV5F1VAU1tLoDGyBkNTt77Y1lIofyY9c6JDd_Dc_eHUkB26WkV1SUgItgyOYt8SCe-qZ2HhxWEgdurSHGFiyDdkZHpjahf29IbNaZJcnBVxyGamn8GPznHyg0HzfyDrtT9pYYhg',
+                   'authorization': access_token,
                    'x-amz-user-agent': 'aws-amplify/2.0.1',
                    'Content-Type': 'application/json',
                    'accept-language': 'th,en;q=0.9'
                    }
-        payload = {
-            'username': 'test',
-            'password': '1q2w3e4r',
-            'grant_type': 'password',
-            'client_id': 'ccs',
-            'response_type': 'token'
-        }
         # r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
         # self.access_token = r.json()['access_token']
         self.headers['authorization'] = self.access_token
