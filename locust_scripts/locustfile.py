@@ -23,7 +23,7 @@ class WebsiteTasks(TaskSet):
                    'cache-control': 'no-cache',
                    'accept': '*/*',
                    'sec-fetch-dest': 'empty',
-                   'authorization': 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1eGxZMFJ2WnBBR3M1MVJYdldpRjJ4SGhsTWJvbmdRZWhDVTZaMGdrX2R3In0.eyJqdGkiOiIzYTBmMDIxNC1iNTg2LTQwNDItOTYzYy1lZDZkMDVjNTBjODMiLCJleHAiOjE1ODQ0MTIyMzMsIm5iZiI6MCwiaWF0IjoxNTg0MzQwMzI4LCJpc3MiOiJodHRwczovL2FvYy1kZXYuYXBwbWFuLmNvLnRoL2F1dGgvcmVhbG1zL2FnbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiNzJhNGI4NS01NGJhLTQzZTYtOGU5YS05ZGI2YTFiM2QyNzIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjY3MiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI1YWY4NjQ1Zi04NmFmLTRkYzQtYTc3My00ODA5NWE2MGQyMTEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QifQ.jiHG4hbE46gqq7WdXKOzlxBYImX6ogAjILIzIHOXif15F83kmOoLM9oA_5IAbVdZdiqyCrzKkoiz7xiw8B5fOir2FfxGn034PnGyDe7UoA4lV1TKw5-qXQemmjbOQyCoBZ3fSE-h4Zc-4p2OAp8Q8M7QAHSTScIOJ6IncMdoB3v9fDLwm5Xzj2AAkW8-lrC8I3D9Nxgl-FVzwrFrzSt7JteNlbYjKvlJfWi2bYqKHzDiqGbP2NH3-HSsepuMA2bL9ucm3-kbVIq66WMjPq6XCWoc6GBoK2UrwHutFIPyhLii1pM3v_Jd6HlaRFe3MokHo8l2rAjf_junWSJb6RcgHA',
+                   'authorization': 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1eGxZMFJ2WnBBR3M1MVJYdldpRjJ4SGhsTWJvbmdRZWhDVTZaMGdrX2R3In0.eyJqdGkiOiIzZDMwMjgyYi1hMjQyLTRhMzEtOGQxMi02MzM3MmRlZDM5ZTAiLCJleHAiOjE1ODQ1MjAxNDcsIm5iZiI6MCwiaWF0IjoxNTg0NDQ4MTQ3LCJpc3MiOiJodHRwczovL2FvYy1kZXYuYXBwbWFuLmNvLnRoL2F1dGgvcmVhbG1zL2FnbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiNzJhNGI4NS01NGJhLTQzZTYtOGU5YS05ZGI2YTFiM2QyNzIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjY3MiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI0NDAzYjNlOS1lZDVhLTQ5NTgtYmQyZi1hMjkwODIxZmM5MGIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJmb28gYmFyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJmb28iLCJmYW1pbHlfbmFtZSI6ImJhciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSJ9.KkNshkzyYK-mFbo57A4iWacBEJhB5zyxHlCbBmJsAbmyGdK-tdIMCuEft2kS7iIFQSnD1I2ht-QEMOtgoGqn9n7F0iAqPRbUGY9IvVEQ1smLNkNoTkduYPlIhqnLHtGVXmst6s4nOCfvbirtyr-5DfMAUhkErqkgyXrOlST-RFZ7hVh4MntkgYzhUUr3Noy4cb1ykMB95OofLxEdV5F1VAU1tLoDGyBkNTt77Y1lIofyY9c6JDd_Dc_eHUkB26WkV1SUgItgyOYt8SCe-qZ2HhxWEgdurSHGFiyDdkZHpjahf29IbNaZJcnBVxyGamn8GPznHyg0HzfyDrtT9pYYhg',
                    'x-amz-user-agent': 'aws-amplify/2.0.1',
                    'Content-Type': 'application/json',
                    'accept-language': 'th,en;q=0.9'
@@ -35,8 +35,8 @@ class WebsiteTasks(TaskSet):
             'client_id': 'ccs',
             'response_type': 'token'
         }
-        r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
-        self.access_token = r.json()['access_token']
+        # r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
+        # self.access_token = r.json()['access_token']
         self.headers['authorization'] = self.access_token
         # credentials = random.choice(user_credentials)
         # self.client.post("/login/", {"username":credentials[0], "password":credentials[1]})
