@@ -2,6 +2,7 @@ import random
 import uuid
 import math
 from locust import HttpLocust, TaskSet, task
+import time
 
 Names = "Beatrix,Blaire,Callie,Cecily,Cleo,Coco,Cosette,Cybil,Daisy".split(",")
 # load user credentials from CSV
@@ -34,9 +35,34 @@ class WebsiteTasks(TaskSet):
         self.headers['authorization'] = self.access_token
         # credentials = random.choice(user_credentials)
         # self.client.post("/login/", {"username":credentials[0], "password":credentials[1]})
-        self.user_id = 'U52030c4abcb993fe5f868d7f48531406'
+        # self.user_id = 'U52030c4abcb993fe5f868d7f48531406'
+        self.user_id=str(uuid.uuid4())
+        self.initialData()
+        time.sleep(2)
         # ws = create_connection('ws://127.0.0.1:5000/echo')
         # self.ws = ws
+
+    def initialData(self):
+        json = {
+            "events": [
+                {
+                    "type": "message",
+                    "mode": "active",
+                    "timestamp": 1462629479859,
+                    "source": {
+                        "type": "user",
+                        "userId": self.user_id
+                    },
+                    "message": {
+                        "id": "325708",
+                        "type": "text",
+                        "text": "test1234 Webhook " + str(uuid.uuid4())
+                    }
+                }
+            ]
+        }
+        r = self.client.post("https://aoc-dev.appman.co.th/webhook/mock-line", json=json, headers={},
+                             name='webhookMessages')
 
     @task(1)
     def getTasks(self):
@@ -63,7 +89,7 @@ class WebsiteTasks(TaskSet):
     #
     #     assert response_data.get("data",{}).get("updateMessage",{}) is not None , r.content[:256]
 
-    @task(20)
+    @task(10)
     def postMessages(self):
         json ={"operationName":"updateMessage","variables":{"input":{"id":self.user_id,
                  "from":"CCS","to":"LINE","type":"text","content":"{\"text\":\"test1234 "+ str(uuid.uuid4())+"\"}"}
@@ -74,8 +100,8 @@ class WebsiteTasks(TaskSet):
             if response_data.get("data",{}).get("updateMessage",{}) is not None :
                 r.success()
             else:
-                r.failure(response_data.get("errors", {})[0]['message'][:255])
-    @task(20)
+                r.failure(response_data.get("errors", {})[0]['message'][:175])
+    @task(10)
     def webhookMessages(self):
         json ={
               "events": [
