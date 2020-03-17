@@ -100,7 +100,7 @@ class WebsiteTasks(TaskSet):
             if response_data.get("data",{}).get("updateMessage",{}) is not None :
                 r.success()
             else:
-                r.failure(response_data.get("errors", {})[0]['message'][:175])
+                r.failure(response_data.get("errors", {})[0]['message'][:160])
     @task(1)
     def webhookMessages(self):
         json ={
