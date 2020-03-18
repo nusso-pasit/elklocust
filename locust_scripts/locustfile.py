@@ -135,5 +135,5 @@ class WebsiteTasks(TaskSet):
 class WebsiteUser(HttpLocust):
     task_set = WebsiteTasks
     #By default the time is randomly chosen uniformly between min_wait and max_wait
-    min_wait = 5000
-    max_wait = 10000
+    min_wait = 200
+    max_wait = 500
