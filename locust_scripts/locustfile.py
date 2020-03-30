@@ -9,7 +9,7 @@ Names = "Beatrix,Blaire,Callie,Cecily,Cleo,Coco,Cosette,Cybil,Daisy".split(",")
 #user_credentials = read_user_credentials_from_csv()
 # https://b08ad5a0.ap.ngrok.io/webhook/
 #http://192.168.2.85:3000/ccs
-webhook_line = "https://aoc-dev.appman.co.th/webhook/mock-line"
+webhook_line = "https://aoc-sit.appman.co.th/webhook/mock-line"
 # webhook_line = 'http://192.168.2.85:8080/webhook/mock-line'
 url= 'https://tdacwe7cl5hhpnd22xqfkf66ia.appsync-api.ap-southeast-1.amazonaws.com/graphql'
 
@@ -22,10 +22,9 @@ payload = {
 }
 r = requests.post("https://aoc-dev.appman.co.th/auth/realms/agm/protocol/openid-connect/token", data=payload)
 access_token = r.json()['access_token']
-
+print(access_token)
 class WebsiteTasks(TaskSet):
     def on_start(self):
-        print("start init")
         self.headers = {'authority': 'tdacwe7cl5hhpnd22xqfkf66ia.appsync-api.ap-southeast-1.amazonaws.com',
                    'pragma': 'no-cache',
                    'cache-control': 'no-cache',
@@ -43,12 +42,12 @@ class WebsiteTasks(TaskSet):
         # self.user_id = 'U52030c4abcb993fe5f868d7f48531406'
         self.user_id=str(uuid.uuid4())
         self.initialData()
-        time.sleep(2)
-        print("end init")
+        # time.sleep(2)
         # ws = create_connection('ws://127.0.0.1:5000/echo')
         # self.ws = ws
 
     def initialData(self):
+        print()
         json = {
             "events": [
                 {
